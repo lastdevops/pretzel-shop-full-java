@@ -1,0 +1,33 @@
+server:
+  port: ${PORT:3001}
+
+spring:
+  application:
+    name: pretzel-shop-api
+  datasource:
+    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:pretzel_shop}
+    username: ${DB_USER:pretzel_user}
+    password: ${DB_PASSWORD:pretzel_password}
+  jpa:
+    hibernate:
+      ddl-auto: none
+    open-in-view: false
+    properties:
+      hibernate:
+        jdbc:
+          time_zone: UTC
+  liquibase:
+    change-log: classpath:db/changelog/db.changelog-master.yaml
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+  mvc:
+    throw-exception-if-no-handler-found: true
+  web:
+    resources:
+      add-mappings: false
+
+app:
+  cors:
+    origin: ${CORS_ORIGIN:http://localhost:5173}
